@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+.env
+*.db
+data/
+output/
+seen_repos.json
+.pytest-tmp/

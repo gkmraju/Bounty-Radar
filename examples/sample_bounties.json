@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sample-oss-1",
+    "title": "Add async retry support to API client",
+    "platform": "json",
+    "url": "https://example.com/issues/async-retry",
+    "prize_min": 250,
+    "prize_max": 500,
+    "currency": "USD",
+    "category": "oss-bounty",
+    "skills": ["python", "api"],
+    "difficulty": "intermediate",
+    "freshness_date": "2026-06-08T10:00:00+00:00",
+    "trust_score": 62,
+    "description": "Publicly listed OSS issue with a fixed bounty for adding retry support to an API client.",
+    "scope_summary": "Implement async retry support for the official API client without changing unrelated auth flows."
+  },
+  {
+    "id": "sample-bug-1",
+    "title": "Public program bounty up to $5,000",
+    "platform": "json",
+    "url": "https://example.com/programs/security",
+    "prize_min": 1000,
+    "prize_max": 5000,
+    "currency": "USD",
+    "category": "bug-bounty-program",
+    "skills": ["security", "api"],
+    "difficulty": "advanced",
+    "freshness_date": "2026-06-07T09:00:00+00:00",
+    "trust_score": 78,
+    "description": "Official public program with published rewards and in-scope API assets.",
+    "scope_summary": "Review the official scope summary for listed web and API targets that are eligible under the program rules."
+  }
+]

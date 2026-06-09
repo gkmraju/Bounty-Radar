@@ -1,0 +1,71 @@
+name: Telegram bounty alerts
+
+on:
+  schedule:
+    - cron: "30 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: telegram-bounty-alerts
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Fetch, rank, and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      DATABASE_PATH: data/bounty_radar.db
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MAX_RESULTS_PER_RUN: ${{ vars.MAX_RESULTS_PER_RUN || '10' }}
+      MIN_SCORE: ${{ vars.MIN_SCORE || '55' }}
+      SKILL_FILTERS: ${{ vars.SKILL_FILTERS || 'python,security,api' }}
+      BLOCKED_KEYWORDS: ${{ vars.BLOCKED_KEYWORDS || 'casino,adult,spam' }}
+      RSS_SOURCES: ${{ vars.RSS_SOURCES || '' }}
+      MANUAL_JSON_SOURCES: ${{ vars.MANUAL_JSON_SOURCES || '' }}
+      GITHUB_QUERIES: ${{ vars.GITHUB_QUERIES || 'is:open is:issue bounty in:title,body||is:open is:issue reward in:title,body||is:open is:issue "paid issue" in:title,body||is:open is:issue "bug bounty" in:title,body' }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Restore bounty database
+        uses: actions/cache@v4
+        with:
+          path: data
+          key: bounty-radar-db-${{ github.run_id }}
+          restore-keys: |
+            bounty-radar-db-
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Fetch bounties
+        run: python main.py fetch
+
+      - name: Rank bounties
+        run: python main.py rank
+
+      - name: Publish to Telegram
+        run: python main.py publish
+
+      - name: Upload SQLite history artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bounty-radar-sqlite-history
+          path: data/bounty_radar.db
+          if-no-files-found: ignore
+          retention-days: 30
