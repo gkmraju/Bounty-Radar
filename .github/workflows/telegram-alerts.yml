@@ -22,6 +22,8 @@ jobs:
       DATABASE_PATH: data/bounty_radar.db
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MAX_RESULTS_PER_RUN: ${{ vars.MAX_RESULTS_PER_RUN || '10' }}
       MIN_SCORE: ${{ vars.MIN_SCORE || '55' }}
