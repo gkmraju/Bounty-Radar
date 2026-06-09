@@ -38,8 +38,12 @@ def load_settings() -> Settings:
     load_dotenv()
     return Settings(
         # A blank env value should disable a source; defaults only apply when the variable is unset.
-        telegram_bot_token=os.getenv("TELEGRAM_BOT_TOKEN", "").strip(),
-        telegram_channel_id=os.getenv("TELEGRAM_CHANNEL_ID", "").strip(),
+        telegram_bot_token=(
+            os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN", "")
+        ).strip(),
+        telegram_channel_id=(
+            os.getenv("TELEGRAM_CHANNEL_ID") or os.getenv("TELEGRAM_CHAT_ID", "")
+        ).strip(),
         max_results_per_run=int(os.getenv("MAX_RESULTS_PER_RUN", "10")),
         min_score=float(os.getenv("MIN_SCORE", "55")),
         skill_filters=[item.lower() for item in _split_csv(os.getenv("SKILL_FILTERS"))],

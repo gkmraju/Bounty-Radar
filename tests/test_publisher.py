@@ -48,3 +48,17 @@ def test_telegram_failure_does_not_mark_published(settings):
     assert results[0].sent is False
     assert "telegram_error" in results[0].message
     assert len(retryable) == 1
+
+
+def test_telegram_http_error_does_not_expose_bot_token(settings):
+    response = requests.Response()
+    response.status_code = 400
+    response.url = "https://api.telegram.org/botsecret-token/sendMessage"
+    response._content = b'{"ok":false,"description":"Bad Request: chat not found"}'
+    error = requests.HTTPError("400 Client Error", response=response)
+
+    safe_error = TelegramPublisher._safe_error(error)
+
+    assert "secret-token" not in safe_error
+    assert "HTTP 400" in safe_error
+    assert "chat not found" in safe_error

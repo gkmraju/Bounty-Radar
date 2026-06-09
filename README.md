@@ -136,6 +136,8 @@ Add these GitHub repository secrets before enabling the schedule:
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHANNEL_ID`
 
+Local `.env` aliases `TELEGRAM_TOKEN` and `TELEGRAM_CHAT_ID` are also supported.
+
 Optional GitHub repository variables:
 
 - `MAX_RESULTS_PER_RUN`
