@@ -1,6 +1,6 @@
-# bounty-radar-telegram
+# Bounty Radar
 
-`bounty-radar-telegram` fetches code bounties, bug bounties, OSS issue bounties, and freelance-style bounty listings, normalizes them into a common schema, ranks them, stores them in SQLite, and publishes the best results to a Telegram channel.
+`Bounty Radar` fetches code bounties, bug bounties, OSS issue bounties, and freelance-style bounty listings, normalizes them into a common schema, ranks them, stores them in SQLite, and publishes the best results to a Telegram channel.
 
 ## Features
 
