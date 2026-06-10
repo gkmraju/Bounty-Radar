@@ -131,10 +131,14 @@ The SQLite database is created at `DATABASE_PATH` and stores:
 
 The workflow in `.github/workflows/telegram-alerts.yml` runs daily at `01:30 UTC`, which is `07:00 IST`, and can also be started manually from the Actions tab.
 
-Add these GitHub repository secrets before enabling the schedule:
+Add either pair of GitHub repository secrets before enabling the schedule:
 
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHANNEL_ID`
+- `TELEGRAM_TOKEN`
+- `TELEGRAM_CHAT_ID`
+
+The aliases `TELEGRAM_TOKEN` and `TELEGRAM_CHAT_ID` are supported for both local `.env` files and GitHub Actions secrets.
 
 Optional GitHub repository variables:
 

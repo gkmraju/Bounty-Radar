@@ -3,6 +3,8 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.pyc
+
+# Local credentials and runtime state
 .env
 *.db
 data/

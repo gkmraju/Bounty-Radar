@@ -46,12 +46,13 @@ class TelegramPublisher:
             try:
                 payload = self._send_message(message)
             except RequestException as exc:
-                logger.warning("Telegram send failed for %s: %s", bounty.id, exc)
+                safe_error = self._safe_error(exc)
+                logger.warning("Telegram send failed for %s: %s", bounty.id, safe_error)
                 results.append(
                     PublishResult(
                         bounty_id=bounty.id,
                         sent=False,
-                        message=f"telegram_error: {exc}",
+                        message=f"telegram_error: {safe_error}",
                         preview=message,
                     )
                 )
@@ -86,6 +87,20 @@ class TelegramPublisher:
         )
         response.raise_for_status()
         return response.json()
+
+    @staticmethod
+    def _safe_error(exc: RequestException) -> str:
+        response = getattr(exc, "response", None)
+        if response is None:
+            return exc.__class__.__name__
+        description = ""
+        try:
+            payload = response.json()
+            description = str(payload.get("description", ""))
+        except ValueError:
+            description = response.reason or ""
+        suffix = f": {description}" if description else ""
+        return f"HTTP {response.status_code}{suffix}"
 
     @staticmethod
     def format_message(bounty: Bounty) -> str:
