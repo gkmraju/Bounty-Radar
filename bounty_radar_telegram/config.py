@@ -45,7 +45,7 @@ def load_settings() -> Settings:
             os.getenv("TELEGRAM_CHANNEL_ID") or os.getenv("TELEGRAM_CHAT_ID", "")
         ).strip(),
         max_results_per_run=int(os.getenv("MAX_RESULTS_PER_RUN", "10")),
-        min_score=float(os.getenv("MIN_SCORE", "55")),
+        min_score=float(os.getenv("MIN_SCORE", "70")),
         skill_filters=[item.lower() for item in _split_csv(os.getenv("SKILL_FILTERS"))],
         blocked_keywords=[item.lower() for item in _split_csv(os.getenv("BLOCKED_KEYWORDS"))],
         database_path=Path(os.getenv("DATABASE_PATH", "bounty_radar.db")),
