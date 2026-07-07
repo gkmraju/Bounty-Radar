@@ -25,8 +25,8 @@ jobs:
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      MAX_RESULTS_PER_RUN: ${{ vars.MAX_RESULTS_PER_RUN || '10' }}
-      MIN_SCORE: ${{ vars.MIN_SCORE || '55' }}
+      MAX_RESULTS_PER_RUN: ${{ vars.MAX_RESULTS_PER_RUN || '3' }}
+      MIN_SCORE: ${{ vars.MIN_SCORE || '70' }}
       SKILL_FILTERS: ${{ vars.SKILL_FILTERS || 'python,security,api' }}
       BLOCKED_KEYWORDS: ${{ vars.BLOCKED_KEYWORDS || 'casino,adult,spam' }}
       RSS_SOURCES: ${{ vars.RSS_SOURCES || '' }}

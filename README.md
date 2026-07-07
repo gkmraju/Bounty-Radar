@@ -46,8 +46,8 @@ Set the required admin config in `.env`:
 
 - `TELEGRAM_BOT_TOKEN`
 - `TELEGRAM_CHANNEL_ID`
-- `MAX_RESULTS_PER_RUN`
-- `MIN_SCORE`
+- `MAX_RESULTS_PER_RUN` defaults to `3`
+- `MIN_SCORE` defaults to `70`
 - `SKILL_FILTERS`
 - `BLOCKED_KEYWORDS`
 
